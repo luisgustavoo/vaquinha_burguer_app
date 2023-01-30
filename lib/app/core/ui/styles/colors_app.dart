@@ -18,6 +18,12 @@ class ColorsApp {
   Color get primary => const Color(0xFF007D21);
 
   Color get secundary => const Color(0xFFF88B0C);
+
+  Color get backgroundScaffold => const Color(0xFF140E0E);
+
+  Color get textLightColor => const Color(0xFF222222);
+
+  Color get priceColor => const Color(0xFFF88B0C);
 }
 
 extension ColorsAppExtension on BuildContext {
