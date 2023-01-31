@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
+import 'package:vaquinha_burguer_app/app/core/extentions/formatter_ptbr_extention.dart';
 import 'package:vaquinha_burguer_app/app/core/ui/styles/colors_app.dart';
 import 'package:vaquinha_burguer_app/app/core/ui/styles/text_styles_app.dart';
 import 'package:vaquinha_burguer_app/app/models/products_model.dart';
@@ -40,11 +40,7 @@ class ProductTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    NumberFormat.currency(
-                      locale: 'Pt-Br',
-                      symbol: r'R$',
-                      decimalDigits: 2,
-                    ).format(product.price),
+                    product.price.currencyFormatterPtBr,
                     style: context.textStylesApp.textMedium.copyWith(
                       color: context.colors.priceColor,
                     ),
@@ -52,8 +48,9 @@ class ProductTile extends StatelessWidget {
                 ],
               ),
             ),
-            Image.network(
-              product.image,
+            FadeInImage.assetNetwork(
+              placeholder: 'assets/images/loading.gif',
+              image: product.image,
               height: 95.h,
               width: 73.w,
             )

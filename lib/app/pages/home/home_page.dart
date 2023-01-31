@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:vaquinha_burguer_app/app/core/ui/widgets/appbar_app.dart';
 import 'package:vaquinha_burguer_app/app/models/products_model.dart';
@@ -13,9 +15,13 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const Divider(
+                height: 0,
+              ),
               itemCount: 5,
               itemBuilder: (context, index) {
+                log('Item $index');
                 return ProductTile(
                   product: ProductsModel(
                     id: 1,
