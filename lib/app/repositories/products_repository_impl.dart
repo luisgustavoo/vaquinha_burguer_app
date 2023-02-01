@@ -15,11 +15,11 @@ class ProductsRepositoryImpl implements ProductsRepository {
   @override
   Future<List<ProductsModel>> findAllProducts() async {
     try {
-      final result =
-          await _dio.unAuth().get<List<Map<String, dynamic>>>('/products');
+      final result = await _dio.unAuth().get<List<dynamic>>('/products');
 
       if (result.data != null) {
-        return result.data!.map(ProductsModel.fromMap).toList();
+        final list = List<Map<String, dynamic>>.from(result.data!);
+        return list.map(ProductsModel.fromMap).toList();
       }
 
       return <ProductsModel>[];

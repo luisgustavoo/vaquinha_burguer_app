@@ -19,6 +19,8 @@ class CustomDio extends DioForNative {
     );
   }
 
+  final base = Env.i()['base_url'];
+
   CustomDio auth() {
     return CustomDio();
   }

@@ -10,7 +10,7 @@ class Env {
 
   static Env? _instance;
 
-  Future<void> load() => DotEnv().load();
+  Future<void> load() => dotenv.load();
 
-  String? operator [](String key) => DotEnv().env[key];
+  String? operator [](String key) => dotenv.env[key];
 }
