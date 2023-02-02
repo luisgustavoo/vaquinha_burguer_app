@@ -18,7 +18,12 @@ class HomeController extends Cubit<HomeState> {
       emit(state.copyWith(status: HomeStateStatus.success, products: products));
     } on Exception catch (e, s) {
       log('Erro ao buscar produtos', error: e, stackTrace: s);
-      emit(state.copyWith(status: HomeStateStatus.error));
+      emit(
+        state.copyWith(
+          status: HomeStateStatus.error,
+          errorMessage: 'Erro ao buscar produtos',
+        ),
+      );
     }
   }
 }

@@ -5,6 +5,7 @@ extension MatchState on HomeState {
   void match<T>({
     T Function(HomeStateStatus status)? status,
     T Function(List<ProductsModel> products)? products,
+    T Function(String message)? errorMessage,
   }) {
     if (status != null) {
       status(this.status);
@@ -12,6 +13,10 @@ extension MatchState on HomeState {
 
     if (this.products.isNotEmpty && products != null) {
       products(this.products);
+    }
+
+    if (this.errorMessage != null && errorMessage != null) {
+      errorMessage(this.errorMessage!);
     }
   }
 }

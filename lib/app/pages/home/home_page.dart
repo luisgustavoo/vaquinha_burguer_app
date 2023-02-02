@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vaquinha_burguer_app/app/core/ui/helpers/loader.dart';
-import 'package:vaquinha_burguer_app/app/core/ui/helpers/messages.dart';
+import 'package:vaquinha_burguer_app/app/core/ui/base_state/base_state.dart';
 import 'package:vaquinha_burguer_app/app/core/ui/widgets/appbar_app.dart';
 import 'package:vaquinha_burguer_app/app/pages/home/extention/home_state_extention.dart';
 import 'package:vaquinha_burguer_app/app/pages/home/home_controller.dart';
@@ -17,13 +16,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with Loader, Messages {
+class _HomePageState extends BaseState<HomePage, HomeController> {
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<HomeController>().findAllProducts();
-    });
+  void onReady() {
+    super.onReady();
+    controller.findAllProducts();
   }
 
   @override
@@ -33,9 +30,9 @@ class _HomePageState extends State<HomePage> with Loader, Messages {
       body: BlocConsumer<HomeController, HomeState>(
         listener: (context, state) {
           state.match(
-            products: (products) {
-              log('$products');
-            },
+            // products: (products) {
+            //   log('$products');
+            // },
             status: (status) {
               status.matchAny(
                 loading: () {
@@ -45,6 +42,9 @@ class _HomePageState extends State<HomePage> with Loader, Messages {
                   hideLoader();
                 },
               );
+            },
+            errorMessage: (message) {
+              showError(message);
             },
           );
         },
